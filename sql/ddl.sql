@@ -94,3 +94,16 @@ CREATE TABLE aplicacao_imposto (
         FOREIGN KEY (cd_pedido)
             REFERENCES pedido(cd_pedido)
 );
+
+
+CREATE TABLE produto (
+    cd_produto INTEGER NOT NULL AUTO_INCREMENT
+    , no_produto VARCHAR(100) NOT NULL
+    , vl_unitario DOUBLE NOT NULL
+    , qt_estoque INTEGER NOT NULL
+    , dt_ultima_alteracao TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    , dt_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+
+    , CONSTRAINT pk_produto
+        PRIMARY KEY (cd_produto)
+);
