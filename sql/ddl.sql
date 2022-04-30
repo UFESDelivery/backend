@@ -66,3 +66,13 @@ CREATE TABLE aplicacao_desconto (
         FOREIGN KEY (cd_pedido)
             REFERENCES desconto(cd_pedido)
 );
+
+
+CREATE TABLE imposto (
+    cd_imposto INTEGER NOT NULL AUTO_INCREMENT
+    , no_imposto VARCHAR(10) NOT NULL
+    , vl_percentual DOUBLE NOT NULL
+
+    , CONSTRAINT pk_imposto
+        PRIMARY KEY (cd_imposto)
+);
