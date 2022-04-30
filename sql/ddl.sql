@@ -76,3 +76,21 @@ CREATE TABLE imposto (
     , CONSTRAINT pk_imposto
         PRIMARY KEY (cd_imposto)
 );
+
+
+CREATE TABLE aplicacao_imposto (
+    cd_imposto INTEGER NOT NULL
+    , cd_pedido INTEGER NOT NULL
+    , vl_total DOUBLE NOT NULL
+
+    , CONSTRAINT pk_aplicacao_imposto_pedido
+        PRIMARY KEY (cd_imposto, cd_pedido)
+    
+    , CONSTRAINT fk_aplicacao_imposto_imposto
+        FOREIGN KEY (cd_imposto)
+            REFERENCES imposto(cd_imposto)
+
+    , CONSTRAINT fk_aplicacao_imposto_pedido
+        FOREIGN KEY (cd_pedido)
+            REFERENCES pedido(cd_pedido)
+);
