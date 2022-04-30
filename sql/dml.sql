@@ -118,7 +118,8 @@ VALUES
 ;
 
 INSERT INTO item_pedido (
-    cd_produto
+    cd_pedido
+    , cd_produto
     , qt_itens
     , vl_unitario
     , vl_total
