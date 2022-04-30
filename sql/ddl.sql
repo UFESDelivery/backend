@@ -41,4 +41,11 @@ CREATE TABLE pedido (
     , dt_ultima_alteracao TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     , dt_inicio TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     , dt_fim TIMESTAMP DEFAULT NULL
+
+    , CONSTRAINT pk_pedido
+        PRIMARY KEY (cd_pedido)
+    
+    , CONSTRAINT fk_pedido_cliente
+        FOREIGN KEY (cd_cliente)
+            REFERENCES cliente(cd_cliente)
 );
