@@ -1,0 +1,32 @@
+version: '3.1'
+
+services:
+  mysql-db-8.0.29-debian:
+    image: mysql:8.0.29-debian
+    container_name: mysql_db_ufes_delivery
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=1234
+      - MYSQL_DATABASE=ufesdelivery
+      - TZ=America/Sao_Paulo
+    volumes:
+      - ./db:/var/lib/mysql
+    networks:
+      - backend
+
+  node-16.15.0-alpine3.14:
+    build: .
+    container_name: node_ufes_delivery
+    restart: always
+    depends_on:
+      - mysql-db-8.0.29-debian
+    ports:
+      - 5080:8080
+      - 5081:8081
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
