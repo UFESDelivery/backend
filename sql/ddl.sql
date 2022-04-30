@@ -64,7 +64,7 @@ CREATE TABLE aplicacao_desconto (
 
     , CONSTRAINT fk_aplicacao_desconto_pedido
         FOREIGN KEY (cd_pedido)
-            REFERENCES desconto(cd_pedido)
+            REFERENCES pedido(cd_pedido)
 );
 
 
