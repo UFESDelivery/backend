@@ -13,4 +13,8 @@ CREATE TABLE desconto (
 
     , CONSTRAINT pk_desconto
         PRIMARY KEY (cd_desconto)
+    
+    , CONSTRAINT fk_desconto_cliente
+        FOREIGN KEY (cd_cliente)
+            REFERENCES cliente(cd_cliente)
 );
