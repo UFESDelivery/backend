@@ -23,7 +23,7 @@ CREATE TABLE desconto (
 
     , CONSTRAINT pk_desconto
         PRIMARY KEY (cd_desconto)
-    
+
     , CONSTRAINT fk_desconto_cliente
         FOREIGN KEY (cd_cliente)
             REFERENCES cliente(cd_cliente)
@@ -44,8 +44,25 @@ CREATE TABLE pedido (
 
     , CONSTRAINT pk_pedido
         PRIMARY KEY (cd_pedido)
-    
+
     , CONSTRAINT fk_pedido_cliente
         FOREIGN KEY (cd_cliente)
             REFERENCES cliente(cd_cliente)
+);
+
+
+CREATE TABLE aplicacao_desconto (
+    cd_desconto INTEGER NOT NULL
+    , cd_pedido INTEGER NOT NULL
+
+    , CONSTRAINT pk_aplicacao_desconto_pedido
+        PRIMARY KEY (cd_desconto, cd_pedido)
+
+    , CONSTRAINT fk_aplicacao_desconto_desconto
+        FOREIGN KEY (cd_desconto)
+            REFERENCES desconto(cd_desconto)
+
+    , CONSTRAINT fk_aplicacao_desconto_pedido
+        FOREIGN KEY (cd_pedido)
+            REFERENCES desconto(cd_pedido)
 );
