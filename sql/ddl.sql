@@ -107,3 +107,23 @@ CREATE TABLE produto (
     , CONSTRAINT pk_produto
         PRIMARY KEY (cd_produto)
 );
+
+
+CREATE TABLE item_pedido (
+    cd_pedido INTEGER NOT NULL
+    , cd_produto INTEGER NOT NULL
+    , qt_itens INTEGER NOT NULL
+    , vl_unitario DOUBLE NOT NULL
+    , vl_total DOUBLE NOT NULL
+
+    , CONSTRAINT pk_item_pedido_produto
+        PRIMARY KEY (cd_pedido, cd_produto)
+
+    , CONSTRAINT fk_item_pedido_pedido
+        FOREIGN KEY (cd_pedido)
+            REFERENCES pedido(cd_pedido)
+
+    , CONSTRAINT fk_item_pedido_produto
+        FOREIGN KEY (cd_produto)
+            REFERENCES produto(cd_produto)
+);
