@@ -2,6 +2,16 @@ CREATE DATABASE ufesdelivery;
 
 USE ufesdelivery;
 
+
+CREATE TABLE cliente (
+    cd_cliente INTEGER NOT NULL AUTO_INCREMENT
+    , no_cliente VARCHAR(150)
+
+    , CONSTRAINT pk_cliente
+        PRIMARY KEY (cd_cliente)
+);
+
+
 CREATE TABLE desconto (
     cd_desconto INTEGER NOT NULL AUTO_INCREMENT
     , cd_cliente INTEGER
