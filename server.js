@@ -59,9 +59,9 @@ let produtos = [
 
 db.sequelize.sync().then(async () => {
     // inserir os produtos
-    console.log("inserindo produtos...");
-    await Produto.bulkCreate(produtos);
-    console.log("produtos inseridos com sucesso!");
+    //console.log("inserindo produtos...");
+    //await Produto.bulkCreate(produtos);
+    //console.log("produtos inseridos com sucesso!");
 });
 
 // para dropar as tabelas e re-sincronizar o banco
@@ -78,6 +78,8 @@ app.get("/", (req, res) => {
 });
 
 require("./app/routes/tutorial.routes")(app);
+
+require("./app/routes/produto.routes")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
