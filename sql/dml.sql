@@ -2,11 +2,69 @@
 
 -- INSERTS --
 
-INSERT INTO cliente (
-    no_cliente
+INSERT INTO estado (
+    ds_estado
+    , cd_uf
+)
+VALUES
+    ('ACRE', 'AC')
+    , ('ALAGOAS', 'AL')
+    , ('AMAPÁ', 'AP')
+    , ('AMAZONAS', 'AM')
+    , ('BAHIA', 'BA')
+    , ('CEARÁ', 'CE')
+    , ('DISTRITO FEDERAL', 'DF')
+    , ('ESPÍRITO SANTO', 'ES')
+    , ('GOIÁS', 'GO')
+    , ('MARANHÃO', 'MA')
+    , ('MATO GROSSO', 'MT')
+    , ('MATO GROSSO DO SUL', 'MS')
+    , ('MINAS GERAIS', 'MG')
+    , ('PARÁ', 'PA')
+    , ('PARAÍBA', 'PB')
+    , ('PARANÁ', 'PR')
+    , ('PERNAMBUCO', 'PE')
+    , ('PIAUÍ', 'PI')
+    , ('RIO DE JANEIRO', 'RJ')
+    , ('RIO GRANDE DO NORTE', 'RN')
+    , ('RIO GRANDE DO SUL', 'RS')
+    , ('RONDÔNIA', 'RO')
+    , ('RORAIMA', 'RR')
+    , ('SANTA CATARINA', 'SC')
+    , ('SÃO PAULO', 'SP')
+    , ('SERGIPE', 'SE')
+    , ('TOCANTINS', 'TO')
+;
+
+INSERT INTO cidade (
+    cd_estado
+    , no_cidade
 )
 VALUES
     ()
+;
+
+INSERT INTO endereco (
+    cd_cidade
+    , ds_email
+    , no_logradouro
+    , no_bairro
+    , ds_numero
+    , nu_cep
+)
+VALUES
+    ()
+;
+
+INSERT INTO usuario (
+    cd_endereco
+    , cd_token
+    , cd_tipo_usuario
+    , no_usuario
+    , ds_email
+)
+VALUES
+    (NULL, NULL, 4, 'ADM', 'ADM@UFESDELIVERY.COM.BR')
 ;
 
 INSERT INTO desconto (
@@ -14,8 +72,6 @@ INSERT INTO desconto (
     , ds_desconto
     , qt_usos
     , qt_max_usos
-    -- , dt_inicio
-    -- , dt_fim
 )
 VALUES
     ()
@@ -28,9 +84,6 @@ INSERT INTO pedido (
     , vl_total_compra
     , vl_total_descontos
     , vl_total_a_pagar
-    -- , dt_ultima_alteracao
-    -- , dt_inicio
-    -- , dt_fim
 )
 VALUES
     ()
@@ -65,8 +118,6 @@ INSERT INTO produto (
     no_produto
     , vl_unitario
     , qt_estoque
-    -- , dt_ultima_alteracao
-    -- , dt_criacao
 )
 VALUES
     -- VITAMINAS
@@ -76,7 +127,7 @@ VALUES
     , ('VITAMINA DE GRAVIOLA', 7.00, 10)
     , ('VITAMINA DE CAJU', 7.00, 10)
     , ('VITAMINA DE MARACUJÁ', 7.00, 10)
-    , ('VITAMINA DE GOIABA', 7.00, 10)
+    , ('VITAMINA DE GOIABA', 7.00, 0)
     , ('VITAMINA DE MANGA', 7.00, 10)
     , ('VITAMINA DE ACEROLA', 7.00, 10)
     -- SUCOS
