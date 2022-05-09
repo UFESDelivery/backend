@@ -100,18 +100,13 @@ exports.buscarPeriodo = (req, res) => {
         });
     }
 
-
-    Object.keys(data1).forEach((val) => {
-        if(!['dia', 'mes', 'ano'].includes(val)){
-            data1[val] = null;
+    ['dia', 'mes', 'ano'].forEach(val => {
+        if(!Object.keys(data1).includes(val)) {
+            return res.status(500).send({
+                message: "parametros incorretos"
+            });
         }
     });
-
-    if(Object.keys(data1).includes(null)){
-        return res.status(500).send({
-            message: "parametros incorretos"
-        });
-    }
 
     const data_2 = data2 ? data2 : Date.now();
 

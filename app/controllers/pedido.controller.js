@@ -1,25 +1,27 @@
 const db = require("../models");
-const Produto = db.produto;
+const Pedido = db.produto;
 const Op = db.Sequelize.Op;
 
-// exports.buscarTodos = (req, res) => {
-//     const nome = req.query.nome;
-//     var filtro = nome ? { no_produto: { [Op.like]: `%${nome}%` } } : null;
-//     Produto.findAll({
-//         where: filtro, 
-//         attributes: [
-//             'no_produto',
-//             'vl_unitario',
-//             'qt_estoque'
-//         ]
-//     })
-//     .then(data => {
-//         res.send(data);
-//     })
-//     .catch(err => {
-//         res.status(500).send({
-//             message:
-//                 err.message || "Não foi possível buscar os produtos"
-//         });
-//     });
-// };
+exports.criar = (req, res) => {
+     if (!req.body.cd_usuario) {
+        res.status(400).send({
+            message: "é necessário informar um usuario"
+        });
+        return;
+    }
+
+    const pedido = {
+        cd_usuario: req.body.cd_usuario,
+    };
+ 
+    Pedido.create(pedido)
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Algum erro ocorreu ao criar o pedido"
+            });
+        });
+};
