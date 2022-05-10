@@ -1,0 +1,13 @@
+modeling/
+sql/
+.vscode/
+.idea/
+.git/
+docker/
+node_modules/
+db/
+
+docker*
+*.md
+.env.exemple
+.gitignore
