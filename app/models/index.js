@@ -28,11 +28,11 @@ db.itemPedido = require("./itemPedido.model.js")(sequelize, Sequelize);
 // relacionamentos
 // relacionar cidade e estado
 db.estado.hasMany(db.cidade, { foreignKey: "cd_estado", as: "cidades" });
-db.cidade.belongsTo(db.estado, { foreignKey: { name: "cd_estado", allowNull:false }, as: "estado", });
+db.cidade.belongsTo(db.estado, { foreignKey: { name: "cd_estado", allowNull:false }, as: "estado" });
 
 // relacionar cidade e endereco
 db.cidade.hasMany(db.endereco, { foreignKey: "cd_cidade", as: "enderecos" });
-db.endereco.belongsTo(db.cidade, { foreignKey: { name: "cd_cidade", allowNull:false }, as: "cidade", });
+db.endereco.belongsTo(db.cidade, { foreignKey: { name: "cd_cidade", allowNull:false }, as: "cidade" });
 
 // relacionar usuario e endereco
 db.endereco.hasMany(db.usuario, { foreignKey: "cd_endereco", as: "usuarios" });
@@ -40,8 +40,9 @@ db.usuario.belongsTo(db.endereco, { foreignKey: { name: "cd_endereco", allowNull
 
 // relacionar usuario e pedido
 db.usuario.hasMany(db.pedido, { foreignKey: "cd_usuario", as: "pedidos" });
-db.pedido.belongsTo(db.usuario, { foreignKey: { name: "cd_usuario", allowNull:false }, as: "usuario", });
+db.pedido.belongsTo(db.usuario, { foreignKey: { name: "cd_usuario", allowNull:false }, as: "usuario" });
 
+// relacionar produto e pedido
 db.pedido.belongsToMany(db.produto, { through: 'itemPedido', foreignKey: 'cd_pedido' });
 db.produto.belongsToMany(db.pedido, { through: 'itemPedido', foreignKey: 'cd_produto' });
 

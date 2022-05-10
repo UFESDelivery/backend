@@ -19,23 +19,23 @@ app.use(express.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 
-// db.sequelize.sync().then(async () => {
-//     console.log("Conectado ao banco!");
-// });
+db.sequelize.sync().then(async () => {
+    console.log("Conectado ao banco!");
+});
 
 // para dropar as tabelas e re-sincronizar o banco
-db.sequelize.sync({ force: true }).then(async () => {
-    console.log("Drop and re-sync db.");
-    console.log("inserindo estados...");
-    await Estado.bulkCreate(estados);
+// db.sequelize.sync({ force: true }).then(async () => {
+//     console.log("Drop and re-sync db.");
+//     console.log("inserindo estados...");
+//     await Estado.bulkCreate(estados);
 
-    console.log("inserindo cidades...");
-    await Cidade.bulkCreate(cidades);
+//     console.log("inserindo cidades...");
+//     await Cidade.bulkCreate(cidades);
 
-    console.log("inserindo produtos...");
-    await Produto.bulkCreate(produtos);
+//     console.log("inserindo produtos...");
+//     await Produto.bulkCreate(produtos);
     
-});
+// });
 
 // simple route
 app.get("/", (req, res) => {
@@ -47,6 +47,8 @@ require("./app/routes/tutorial.routes")(app);
 require("./app/routes/produto.routes")(app);
 
 require("./app/routes/usuario.routes")(app);
+
+require("./app/routes/pedido.routes")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;

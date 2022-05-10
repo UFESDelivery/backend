@@ -3,14 +3,18 @@ const Usuario = db.usuario;
 const Cidade = db.cidade;
 const Op = db.Sequelize.Op;
 
-exports.criar = (req, res) => {
-    const { cd_cidade } = req.body.endereco;
-    
-    // verificar se a cidade existe
-    Cidade.findByPk(cd_cidade)
-    .then(cidade => {
-        if(cidade){
-            // pegar os dados do usuario pelo body
+exports.criar = async (req, res) => {
+    try {
+        const { cd_cidade } = req.body.endereco;
+
+        // verificar se o email ja esta cadastrado
+        const usuarioExistente = await Usuario.findOne({ where: { ds_email: req.body.ds_email }});
+
+        if(usuarioExistente) throw { status: 400, message: "Este email já está cadastrado!"};
+
+        // verificar se a cidade existe
+        if((await Cidade.findByPk(cd_cidade))) {
+
             const dadosUsuario = {
                 no_usuario: req.body.no_usuario,
                 ds_email: req.body.ds_email,
@@ -21,28 +25,25 @@ exports.criar = (req, res) => {
                     ds_cep: req.body.endereco.ds_cep,
                     cd_cidade
                 }
-                
+
             };
-            
+
             // criar usuario
-            Usuario.create(dadosUsuario)
-            .then(usuario => {
-                // criar o endereco do usuario e atribuir as chaves
-                usuario.createEndereco(dadosUsuario.endereco)
-                .then(endereco => {
-                    return res.send({ message: "Usuario criado com sucesso!" });
-                });
-            });
+            const usuarioCriado = await Usuario.create(dadosUsuario, {
+                include: [{
+                    model: db.endereco,
+                    as: 'endereco' // mesmo nome do alias
+                }]
+            })
             
+            return res.send(usuarioCriado);
+
         } else {
-            res.status(404).send({
-                message: `cidade não encontrada!`
-            });
+            throw { status: 404, message: "Cidade não encontrada!" }
         }
-        
-    })
-    .catch(err => {
-        return res.status(500).send(err);
-    });
+
+    } catch(err) {
+        return res.status(err.status || 500).send(err.message || err);
+    }
 
 };

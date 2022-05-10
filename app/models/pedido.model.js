@@ -32,12 +32,13 @@ module.exports = (sequelize, Sequelize) => {
         },
         vl_total_compra:  {
             type: Sequelize.DOUBLE,
-            allowNull: false,
+            allowNull: null,
+            defaultValue: 0
         },
         vl_total_a_pagar: {
             type: Sequelize.VIRTUAL,
             get() {
-                return `${this.vl_total_compra + vl_total_impostos - this.vl_total_descontos}`;
+                return `${this.vl_total_compra + this.vl_total_impostos - this.vl_total_descontos}`;
             },
             set(value) {
                 throw new Error('Não é possível setar o valor de vl_total_a_pagar');
